@@ -21,6 +21,8 @@ for i in range(26):
 
 # Game variables
 hangman_status = 4
+word = "Developer"
+guessed = []
 
 # Colors
 WHITE = (255,255,255)
@@ -28,6 +30,7 @@ BLACK = (0, 0, 0)
 
 # Fonts
 LETTER_FONT = pygame.font.SysFont('comicsans', 40)
+WORD_FONT = pygame.font.SysFont('comicsans', 60)
 
 # Load images
 images = []
@@ -43,6 +46,16 @@ run = True
 
 def draw():
     win.fill((WHITE))
+
+    # Draw word
+    display_word = ""
+    for letter in word:
+        if letter in guessed:
+            display_word += letter + " "
+        else:
+            display_word += "_ "
+    text = WORD_FONT.render(display_word, 1, BLACK)
+    win.blit(text, (400, 200))
 
     # Draw buttons
     for letter in letters:
@@ -70,6 +83,7 @@ while run:
                 if visible:
                     dis = math.sqrt((x - m_x)**2 + (y - m_y)**2)
                     if dis < RADIUS:
-                        letter[3] = False 
+                        letter[3] = False
+                        guessed.append(ltr) 
 
 pygame.quit()
