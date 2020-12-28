@@ -1,4 +1,5 @@
 import pygame
+import math
 
 # Setup display
 pygame.init()
